@@ -1,0 +1,18 @@
+# 忽略所有osc相关文件
+.osc/
+.lock
+
+# dingtalk忽略安装包
+dingtalk_3.5.5-Beta.0_amd64.deb
+
+# electron-dingtalk忽略安装包
+electron-dingtalk*.tar.bz2
+
+# electron-wechat忽略安装包
+electron-wechat-0.1.1.tar.bz2
+
+# ulauncher忽略安装包
+ulauncher_*.tar.gz
+
+# wolai忽略appimage文件
+*.AppImage
