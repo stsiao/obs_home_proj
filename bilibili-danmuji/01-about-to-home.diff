@@ -1,0 +1,24 @@
+--- AboutInfo.py.orig	2022-01-31 19:47:03.210786561 +0800
++++ AboutInfo.py	2022-01-31 20:12:21.840536196 +0800
+@@ -1,11 +1,12 @@
+ from preparation import *
+-import os.path
+ import subprocess, sys
+ 
+ 
+ class AboutInfo():
+     def __init__(self):
+-        self.path = os.path.join("config", "关于.txt")
++        if not os.path.exists(os.path.expanduser('~')+r'/.config/huihui486.bilibili-danmuji/'):
++            os.mkdir(os.path.expanduser('~')+r'/.config/huihui486.bilibili-danmuji/')
++        self.path = os.path.expanduser('~')+r'/.config/huihui486.bilibili-danmuji/文件.txt'
+         self.info = '# 声明：\n'\
+                     '此软件只做学习交流，禁止商用\n\n'\
+                     '# 项目/资料地址：\n'\
+@@ -28,4 +29,4 @@
+     def show(self):
+         self.__addInfo()
+         opener = "open" if sys.platform == "darwin" else "xdg-open"
+-        subprocess.call([opener, self.path])
+\ 文件尾没有换行符
++        subprocess.call([opener, self.path])

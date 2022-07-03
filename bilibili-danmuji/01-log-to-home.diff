@@ -1,0 +1,32 @@
+--- preparation.py.orig	2022-01-31 20:13:29.541772816 +0800
++++ preparation.py	2022-01-31 20:17:50.231132181 +0800
+@@ -61,18 +61,18 @@
+ '''
+ 日志对象 
+ '''
+-if not os.path.exists('log'):
+-    os.mkdir('log')
++if not os.path.exists(os.path.expanduser('~')+r'/.config/huihui486.bilibili-danmuji/'):
++    os.mkdir(os.path.expanduser('~')+r'/.config/huihui486.bilibili-danmuji/')
+ 
+ def creatLogger():
+     logger = logging.getLogger('mylogger')
+     logger.setLevel(logging.DEBUG)
+     # 全部日志处理器
+-    rf_handler = logging.handlers.TimedRotatingFileHandler('log/all.log', when='midnight', interval=1, backupCount=7,
++    rf_handler = logging.handlers.TimedRotatingFileHandler(os.path.expanduser('~')+r'/.config/huihui486.bilibili-danmuji/all.log', when='midnight', interval=1, backupCount=7,
+                                                                atTime=datetime.time(0, 0, 0, 0))
+     rf_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+     # error日志处理器
+-    f_handler = logging.FileHandler('log/error.log')
++    f_handler = logging.FileHandler(os.path.expanduser('~')+r'/.config/huihui486.bilibili-danmuji/error.log')
+     f_handler.setLevel(logging.ERROR)
+     f_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(filename)s[:%(lineno)d] - %(message)s"))
+     # 加入logger
+@@ -100,4 +100,4 @@
+     fontChange = QtCore.pyqtSignal(QFont)
+ 
+ # 实例化
+-global_ms = MySignals()
+\ 文件尾没有换行符
++global_ms = MySignals()

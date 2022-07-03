@@ -1,0 +1,73 @@
+#!/bin/sh
+# Name: Arctime installer
+# Version: 2.2.1
+# Description: install Arctime to your openSUSE.
+# Author: Sigmond Tsiao <gamebus2011@hotmail.com>
+
+# force root
+if [ "`id -u`" != "0" ]; then
+	echo "error: You must be root to use this program!"
+	exit 1
+fi
+PACKAGE_ARCH=amd64
+
+ACT_VER="2.2.1"
+ACT_PACKAGE="ARCTIME_PRO_${ACT_VER}_LINUX.7z"
+ACT_FILESN="9b230815-ea31-40d8-bbe1-e9978de5969b"
+ACT_URL="https://stsiao.coding.net/api/share/download/$ACT_FILESN"
+ACT_DSK="https://stsiao.coding.net/api/share/download/6b629ac1-5c4f-4a40-9288-47b69ae053a9"
+SYSTEM_TMP=/tmp
+TMP_DIR=/tmp/arctime-${ACT_VER}
+echo "Downloading package from arctime ..."
+wget ${ACT_URL} -O ${SYSTEM_TMP}/${ACT_PACKAGE}
+wget ${ACT_DSK} -O ${SYSTEM_TMP}/arctime-desktop.tar.gz
+# sha256sum
+SHA256=`sha256sum ${SYSTEM_TMP}/${ACT_PACKAGE}`
+CHECKSUM=`echo $SHA256 | grep 623bd4fec7b13f99320e6d7fcfb3458010294946ea2481c2b3b54bec3d8c841c`
+if [ "$CHECKSUM" = "" ]; then
+read -p "Check sha256sum faild. Press any key to exit."
+echo "Installation failed, please check your network and try again."
+exit 1
+else
+echo "Successfully downloaded ${TMP_URL} to ${SYSTEM_TMP}/${ACT_PACKAGE}."
+fi
+
+SHA256=`sha256sum ${SYSTEM_TMP}/arctime-desktop.tar.gz`
+CHECKSUM=`echo $SHA256 | grep 94165783ae36d121de531ae00bd779950d1d7cc32f32edc4afa3a67d9ad2c73b`
+if [ "$CHECKSUM" = "" ]; then
+read -p "Check sha256sum faild. Press any key to exit."
+echo "Installation failed, please check your network and try again."
+exit 1
+else
+echo "Successfully downloaded ${TMP_URL} to ${SYSTEM_TMP}/arctime-desktop.tar.gz."
+fi
+
+echo "Unpacking ${ACT_PACKAGE} ... it'll take some time ..."
+mkdir -p ${TMP_DIR}
+pushd ${TMP_DIR} &>/dev/null
+mv ../${ACT_PACKAGE} .
+mv ../arctime-desktop.tar.gz .
+7z x ${ACT_PACKAGE}
+tar -zxvf arctime-desktop.tar.gz
+echo "Successfully unpacked ${SYSTEM_TMP}/${ACT_PACKAGE} to ${TMP_DIR}"
+
+if [ -L /usr/bin/arctime ]; then
+    echo "Remove the old link which can't be automatic remove."
+    rm -rf /usr/bin/arctime
+fi
+cp -rf ARCTIME_PRO_${ACT_VER}_LINUX/* /opt/org.arctime/
+cp -f arctime-16x16.png /usr/share/icons/hicolor/16x16/apps/arctime.png
+cp -f arctime-24x24.png /usr/share/icons/hicolor/24x24/apps/arctime.png
+cp -f arctime-32x32.png /usr/share/icons/hicolor/32x32/apps/arctime.png
+cp -f arctime-48x48.png /usr/share/icons/hicolor/48x48/apps/arctime.png
+cp -f arctime.desktop /usr/share/applications/
+cp -f arctime /opt/org.arctime/
+chmod 777 -R /opt/org.arctime/
+popd &>/dev/null
+rm -rf ${TMP_DIR}
+
+/sbin/ldconfig
+/usr/bin/gtk-update-icon-cache --quiet --force /usr/share/icons/hicolor/
+/usr/bin/update-desktop-database /usr/share/applications &>/dev/nul
+
+echo "Congratulations! Installation succeed!"
