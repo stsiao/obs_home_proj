@@ -1,0 +1,111 @@
+-------------------------------------------------------------------
+Fri Jan 14 14:38:38 UTC 2022 - Dead Mozay <dead_mozay@opensuse.org>
+
+- Update to version 5.14.3:
+  * Support DBusActivatable apps.
+  * Update Google and Stackoverflow icons. 
+
+-------------------------------------------------------------------
+Mon Nov 15 08:31:48 UTC 2021 - Dead Mozay <dead-mozay@opensuse.org>
+
+- Update to version 5.14.2:
+  * Avoid issue with applications not launching: Revert previous
+    behavior, but only use systemd-run if running from within systemd.
+
+-------------------------------------------------------------------
+Thu Nov 11 09:22:36 UTC 2021 - Dead Mozay <dead-mozay@opensuse.org>
+
+- Update to version 5.14.1:
+  * Tried to fix applications not launching.
+  * Show a more helpful error instead of "KeyError" if the extension
+    controller is not registered when trying to change the
+    application preferences.
+  * Added build target for Ubuntu Impish and restored it for Bionic
+    (also pushed for 5.14.0 retroactively)
+  * Added supports for more variants of github extension URL
+    (Roshan R Chandar).
+
+-------------------------------------------------------------------
+Mon Sep 20 03:45:59 UTC 2021 - Dead Mozay <dead_mozay@opensuse.org>
+
+- Update to version 5.14.0:
+  * Fix crashes due to XInitThreads not being called.
+  * Fix main UI so that it scales with HiDPI displays / large fonts.
+  * Add preference allowing to show apps even if they specify not 
+    to show in the current desktop environment.
+  * Prevent "zombie processes" being created when trying to launch 
+    an app which is already running.
+
+-------------------------------------------------------------------
+Sun Sep  5 03:31:00 UTC 2021 - Dead Mozay <dead-mozay@opensuse.org>
+
+- Update to version 5.13.0:
+  * Make sure ulauncher uses Xwayland when launched from systemd.
+  * Implement standard shell/emacs ctrl-n/ctrl-p scrolling. 
+
+-------------------------------------------------------------------
+Tue Aug 24 13:07:57 UTC 2021 - Dead Mozay <dead-mozay@opensuse.org>
+
+- Update to version 5.12.2:
+  * App launcher: Fix terminal commands with Desktop entries not launching.
+  * ulauncher-toggle: Switch to use '#/bin/sh' shebang for better compatibility. 
+
+-------------------------------------------------------------------
+Sun Aug 22 03:16:28 UTC 2021 - Dead Mozay <dead-mozay@opensuse.org>
+
+- Update to version 5.12.1:
+  * Fix issue launching apps with trailing spaces in the desktop entry. 
+
+-------------------------------------------------------------------
+Fri Aug 20 15:19:26 UTC 2021 - Dead Mozay <dead-mozay@opensuse.org>
+
+- Update to version 5.12.0:
+  * Fixed crashes due to GTK4 library incompatibility.
+  * Fuzzy matching improvements.
+  * Restore extension logging.
+  * Prevent apps from exiting if Ulauncher crashes or is terminated.
+  * Add support for GDK_BACKEND=wayland,x11.
+  * Respect DesktopEntry OnlyShowIn and NotShowIn.
+  * Fix ampersand breaking highlighting.
+  * Change the systemd file to auto-start more consistently.
+  * Support symlinks in extensions.
+  * Suggest ulauncher-toggle when ulauncher is already running.
+  * Several minor tweaks to logging, performance etc: 28eb396, 
+    5ec85ff, 01012ff, 23a1d2c, 1bf522c. 
+
+-------------------------------------------------------------------
+Mon Apr 19 13:31:21 UTC 2021 - Dead Mozay <dead_mozay@opensuse.org>
+
+- Update to version 5.11.0:
+  * Made a dependency on app indicator optional 
+
+-------------------------------------------------------------------
+Mon Feb  8 03:45:08 UTC 2021 - Dead Mozay <dead_mozay@opensuse.org>
+
+- Update to version 5.10.0:
+  * Fix json files corruptions.
+  * ^ now raises a number to a power when using calculator. 
+
+-------------------------------------------------------------------
+Tue Nov 24 08:06:21 UTC 2020 - Dead Mozay <dead_mozay@opensuse.org>
+
+- Update to version 5.9.0:
+  * Added an setting to disable hiding window on losing focus. 
+
+-------------------------------------------------------------------
+Wed Oct 28 12:27:59 UTC 2020 - Dead Mozay <dead-mozay@opensuse.org>
+
+- Update to version 5.8.1:
+  * Enhancement: Using Tab and Shift+Tab to navigate results
+  * Add ulauncher systemd unit file and updated Readme instructions
+
+-------------------------------------------------------------------
+Mon Jun 29 05:18:16 UTC 2020 - Dead Mozay <dead_mozay@opensuse.org>
+
+- Update to version 5.8.0: 
+  * Configurable number of frequent apps
+
+-------------------------------------------------------------------
+Sun May 17 11:25:55 UTC 2020 - Dead Mozay <dead_mozay@opensuse.org>
+
+- Initial package 

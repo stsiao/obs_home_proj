@@ -1,0 +1,8 @@
+<services>
+  <service name="download_url">
+    <param name="host">cdn.wostatic.cn</param>
+    <param name="protocol">https</param>
+    <param name="path">/dist/installers/wolai-1.2.3.AppImage</param>
+    <param name="filename">wolai.AppImage</param>
+  </service>
+</services>

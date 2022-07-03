@@ -1,0 +1,59 @@
+#!/bin/sh
+# Name: typora installer
+# Version: 0.9.98
+# Description: install Typora to your openSUSE.
+# Author: Sigmond Tsiao <gamebus2011@hotmail.com>
+
+# force root
+if [ "`id -u`" != "0" ]; then
+	echo "error: You must be root to use this program!"
+	exit 1
+fi
+PACKAGE_ARCH=amd64
+TPA_VER="0.9.98"
+TPA_FILESN="a04ab778-e67a-4e19-923e-87a2e96c933c"
+TPA_PACKAGE="Typora-linux-x64.tar.gz"
+TPA_URL="https://stsiao.coding.net/api/share/download/$TPA_FILESN"
+SYSTEM_TMP=/tmp
+TMP_DIR=/tmp/typora-${TPA_VER}
+echo "Downloading package from typora ..."
+wget ${TPA_URL} -O ${SYSTEM_TMP}/${TPA_PACKAGE}
+# sha256sum
+SHA256=`sha256sum ${SYSTEM_TMP}/${TPA_PACKAGE}`
+CHECKSUM=`echo $SHA256 | grep 5cf1f2b171b964d64f34fb50dfe0575ac87887dfbc79d7a6affa1f9b06973e78`
+if [ "$CHECKSUM" = "" ]; then
+read -p "Check sha256sum faild. Press any key to exit."
+echo "Installation failed, please check your network and try again."
+exit 1
+else
+echo "Successfully downloaded ${TMP_URL} to ${SYSTEM_TMP}/${TPA_PACKAGE}."
+fi
+
+echo "Unpacking ${TPA_PACKAGE} ... it'll take some time ..."
+mkdir -p ${TMP_DIR}
+pushd ${TMP_DIR} &>/dev/null
+mv ../${TPA_PACKAGE} .
+tar -zxvf ${TPA_PACKAGE}
+echo "Successfully unpacked ${SYSTEM_TMP}/${TPA_PACKAGE} to ${TMP_DIR}/bin"
+
+if [ -L /usr/bin/typora ]; then
+    echo "Remove the old link which can't be automatic remove."
+    rm -rf /usr/bin/typora
+fi
+cp -rf bin/Typora-linux-x64/* /opt/io.typora
+ln -s /opt/io.typora/Typora /usr/bin/typora
+cp -f bin/Typora-linux-x64/resources/app/asserts/icon/icon_16x16.png /usr/share/icons/hicolor/16x16/apps/typora.png
+cp -f bin/Typora-linux-x64/resources/app/asserts/icon/icon_32x32.png /usr/share/icons/hicolor/32x32/apps/typora.png
+cp -f bin/Typora-linux-x64/resources/app/asserts/icon/icon_128x128.png /usr/share/icons/hicolor/128x128/apps/typora.png
+cp -f bin/Typora-linux-x64/resources/app/asserts/icon/icon_256x256.png /usr/share/icons/hicolor/256x256/apps/typora.png
+cp -f bin/Typora-linux-x64/resources/app/asserts/icon/icon_512x512.png /usr/share/icons/hicolor/512x512/apps/typora.png
+wget https://stsiao.coding.net/api/share/download/f1b35cac-f682-4f06-beab-6b88f8f36c7b -O /usr/share/applications/typora.desktop
+
+popd &>/dev/null
+rm -rf ${TMP_DIR}
+
+/sbin/ldconfig
+/usr/bin/gtk-update-icon-cache --quiet --force /usr/share/icons/hicolor/
+/usr/bin/update-desktop-database /usr/share/applications &>/dev/nul
+
+echo "Congratulations! Installation succeed!"

@@ -1,0 +1,54 @@
+#!/bin/sh
+# Name: winetricks-zh installer
+# Version: 2.2.1
+# Description: install winetricks-zh to your openSUSE.
+# Author: Sigmond Tsiao <gamebus2011@hotmail.com>
+
+# force root
+if [ "`id -u`" != "0" ]; then
+	echo "error: You must be root to use this program!"
+	exit 1
+fi
+PACKAGE_ARCH=amd64
+
+WZH_VER="20210206.1"
+WZH_PACKAGE="winetricks-zh-${WZH_VER}.tar.gz"
+WZH_URL="https://github.com/hillwoodroc/winetricks-zh/archive/refs/tags/${WZH_VER}.tar.gz"
+SYSTEM_TMP=/tmp
+TMP_DIR=/tmp/winetricks-zh-${WZH_VER}
+echo "Downloading package from github ..."
+wget ${WZH_URL} -O ${SYSTEM_TMP}/${WZH_PACKAGE}
+# sha256sum
+SHA256=`sha256sum ${SYSTEM_TMP}/${WZH_PACKAGE}`
+CHECKSUM=`echo $SHA256 | grep cb01faa49900980da18a564f35c7f511c67ea92114ecaf2e3a07b1645d7b51f3`
+if [ "$CHECKSUM" = "" ]; then
+read -p "Check sha256sum faild. Press any key to exit."
+echo "Installation failed, please check your network and try again."
+exit 1
+else
+echo "Successfully downloaded ${TMP_URL} to ${SYSTEM_TMP}/${WZH_PACKAGE}."
+fi
+
+echo "Unpacking ${WZH_PACKAGE} ... it'll take some time ..."
+mkdir -p ${TMP_DIR}
+pushd ${TMP_DIR} &>/dev/null
+mv ../${WZH_PACKAGE} .
+tar -zxvf ${WZH_PACKAGE}
+echo "Successfully unpacked ${SYSTEM_TMP}/${WZH_PACKAGE} to ${TMP_DIR}"
+
+if [ -L /usr/bin/winetricks-zh ]; then
+    echo "Remove the old link which can't be automatic remove."
+    rm -rf /usr/bin/winetricks-zh
+fi
+cp winetricks-zh-${WZH_VER}/winetricks-zh /usr/bin/
+cp winetricks-zh-${WZH_VER}/icon/winetricks-zh.svg /usr/share/icons/hicolor/scalable/apps/
+cp winetricks-zh-${WZH_VER}/winetricks-zh.desktop /usr/share/applications/
+chmod a+x /usr/bin/winetricks-zh
+popd &>/dev/null
+rm -rf ${TMP_DIR}
+
+/sbin/ldconfig
+/usr/bin/gtk-update-icon-cache --quiet --force /usr/share/icons/hicolor/
+/usr/bin/update-desktop-database /usr/share/applications &>/dev/nul
+
+echo "Congratulations! Installation succeed!"

@@ -1,0 +1,13 @@
+-------------------------------------------------------------------
+Sat Jul  2 13:52:25 UTC 2022 - Sigmond Tsiao <gamebus2011@hotmail.com>
+
+- 1.2.3
+ * feat
+ ** You can customize the global recall shortcut key.
+ ** Theme following system can be set.
+ ** Automatic update options can be set.
+ ** The cache can be cleaned up manually.
+
+ * fix
+ ** the taskbar Title cannot be updated in some cases.
+ ** Some other problems.

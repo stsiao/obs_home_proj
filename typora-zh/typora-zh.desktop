@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Typora
+GenericName=Markdown Editor
+Exec=typora %U
+Icon=typora
+Type=Application
+StartupNotify=true
+Categories=Utility;TextEditor;
+MimeType=text/markdown;text/x-markdown;
+
