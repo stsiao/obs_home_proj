@@ -1,2 +1,2 @@
-# obs_home_proj
-个人仓库构建文件保存
+# OBS个人仓库工程文件
+> 仓库地址：[home:stsiao](https://build.opensuse.org/project/show/home:stsiao)
