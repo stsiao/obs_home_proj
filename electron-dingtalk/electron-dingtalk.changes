@@ -1,0 +1,28 @@
+-------------------------------------------------------------------
+Sun Jan 30 14:06:54 UTC 2022 - Sigmond Tsiao <gamebus2011@hotmail.com>
+
+- 2.1.14-1
+ * fixed no window error
+
+-------------------------------------------------------------------
+Sat Jan 29 15:10:06 UTC 2022 - Sigmond Tsiao <gamebus2011@hotmail.com>
+
+- 2.1.14 from 2.1.10 
+ * Bump follow-redirects from 1.14.6 to 1.14.7 (#398)
+ * Bumps [follow-redirects](https://github.com/follow-redirects/follow-redirects) from 1.14.6 to 1.14.7.
+ ** [Release notes](https://github.com/follow-redirects/follow-redirects/releases)
+ ** [Commits](https://github.com/follow-redirects/follow-redirects/compare/v1.14.6...v1.14.7)
+ ********
+ * updated-dependencies:
+ ** dependency-name: follow-redirects
+ ** dependency-type: indirect
+
+ from 2.1.13
+ * fix: app connot startup
+
+ from 2.1.12
+ * release 2.1.12
+
+ from 2.1.11
+ * updated-dependencies
+ * support refreash pages after login & logout
